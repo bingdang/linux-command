@@ -16,13 +16,38 @@ mq-mobile = "screen and (max-width: 479px)"
   --color-hover: #f2f2f2;
 }
 
+/* 现代亮暗切换按钮 */
+#theme-toggle
+  position fixed
+  left 14px
+  top 12px
+  z-index 999
+  width 36px
+  height 36px
+  border-radius 50%
+  border none
+  background transparent
+  display flex
+  align-items center
+  justify-content center
+  cursor pointer
+  padding 0
+  transition background 0.25s ease
+  color currentColor
+  outline none
+  &:hover
+    background rgba(128,128,128,0.18)
+  svg
+    display block
+    pointer-events none
+
 .warpper {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   .footer {
-    padding-bottom: 280px;
+    padding-bottom: 60px;
   }
 }
 
@@ -40,8 +65,8 @@ mq-mobile = "screen and (max-width: 479px)"
   .search {
     min-height 20px
     position relative
-    display table
-    border-collapse separate
+    display flex
+    align-items stretch
     li,ul {
       list-style none
     }
@@ -58,10 +83,10 @@ mq-mobile = "screen and (max-width: 479px)"
       border 1px solid var(--color-header-border)
       background var(--color-theme-bg)
       min-width 100px
-      top 39px
+      top 52px
       width 100%
       padding 5px
-      border-radius 5px 5px 5px 5px
+      border-radius 12px
       li {
         line-height 23px
         span{
@@ -82,109 +107,84 @@ mq-mobile = "screen and (max-width: 479px)"
         }
       }
     }
-    .query, .enter-input {
-      display table-cell
-      transition border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s
-    }
     .query {
+      flex 1
+      min-width 0
       resize: none;
       position relative
       z-index 2
-      width 100%
-      height 40px
-      padding 6px 12px
-      font-size 14px
-      font-weight bold
-      line-height 1.42857143
+      height 46px
+      padding 0 16px
+      font-size 15px
+      font-weight normal
+      line-height 46px
       background-color: transparent;
       background-image none
-      border 1px solid $border-color
-      border-radius 5px 0 0 5px
+      border none
+      border-radius 24px 0 0 24px
       -webkit-appearance: none;
+      outline none
+      box-shadow: 0 0 0 2px #4e6ef2 inset;
+      transition box-shadow 0.2s ease
       &:focus {
         z-index 99
-        border-color #66afe9
         outline 0
-        box-shadow inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)
+        box-shadow: 0 0 0 2px #4e6ef2 inset, 0 4px 16px rgba(78,110,242,0.15);
       }
     }
     .enter-input {
-      white-space nowrap
+      flex-shrink 0
+      display flex
+      align-items stretch
       button {
-        margin 0
-        left -1px
-        position relative
-        z-index 5
-        display inline-block
-        padding 9px 23px
-        font-size 14px
+        display flex
+        align-items center
+        justify-content center
+        height 46px
+        padding 0 26px
+        font-size 15px
         font-weight bold
-        line-height 1.42857143
-        text-align center
-        text-rendering auto
         white-space nowrap
-        vertical-align middle
-        touch-action manipulation
         cursor pointer
         user-select none
-        background-image none
-        border 1px solid transparent
-        border-collapse separate
-        border-radius 0 5px 5px 0
-        border-color $border-color
-        &:focus,&:active:focus {
-          outline thin dotted
-          outline 5px auto -webkit-focus-ring-color
-          outline-offset -2px
+        border none
+        outline none
+        border-radius 0 24px 24px 0
+        background linear-gradient(135deg, #4e6ef2 0%, #8b5cf6 100%)
+        color #fff
+        letter-spacing 0.5px
+        transition all 0.2s ease
+        box-shadow: -2px 0 0 0 #4e6ef2;
+        &:hover {
+          background linear-gradient(135deg, #3d5de0 0%, #7c4fe0 100%)
+          box-shadow: -2px 0 0 0 #3d5de0, 0 4px 12px rgba(78,110,242,0.35);
         }
         &:active {
-          color #333
-          background-color #e6e6e6
-          border-color #b4b4b4
-          background-image none
-          box-shadow inset 0 8px 32px -8px rgba(0,0,0,0.3)
-        }
-        &:focus {
-          color #333
-          background-color #e6e6e6
-          border-color #999
-          text-decoration none
-        }
-        &:hover {
-          color #333
-          background-color #e6e6e6
-          border-color #b4b4b4
+          transform scale(0.97)
         }
       }
     }
   }
 }
 
-.footer {
+.footer
   text-align center
-  padding-top 31px
-  font-size 14px
+  font-size 13px
   font-weight 300
   border-top 1px solid var(--color-header-border)
-  padding-bottom 50px;
-  padding 31px 6px 50px 6px
-  &.home {
+  padding 24px 6px 40px 6px
+  color #888
+  &.home
     border-top 0
-  }
-  div {
-    font-size 12px
-  }
-  .ad a b {display:block;line-height: 1;}
-  .ad a {width:160px;}
-  .ad_title {
-    padding-top: 3rem;
-  }
-  .ad {
-    flex-wrap: wrap;
-    display: inline-flex;
-    gap: 1rem;
-  }
-}
+  div
+    font-size 13px
+    margin-top 6px
+  a
+    color inherit
+    opacity 0.75
+    &:hover
+      opacity 1
+
 .header.home {
   .header_inner {
     display flex
@@ -198,7 +198,11 @@ mq-mobile = "screen and (max-width: 479px)"
   }
   .search {
     display flex
-    min-width 320px
+    width 280px
+    transition width 0.35s cubic-bezier(0.4,0,0.2,1)
+    &:focus-within {
+      width 420px
+    }
   }
 }
 
@@ -212,18 +216,24 @@ mq-mobile = "screen and (max-width: 479px)"
   z-index 99
 }
 
-.header_list {
-  padding 10px 10px 10px 13px 
+.header_list
+  padding 10px 10px 10px 13px
   border-bottom 1px solid var(--color-header-border)
-  .logo {
-    padding-right 24px
-    text-align left
-    svg {
-      height 37px
-      width 136px
-    }
-  }
-}
+  .logo
+    padding-right 20px
+    flex-shrink 0
+    display flex
+    align-items center
+    a
+      display flex
+      align-items center
+      text-decoration none
+      &:hover
+        opacity 1
+    svg
+      width 32px
+      height 32px
+      flex-shrink 0
 
 .search_list {
   padding 79px 27px 
@@ -275,8 +285,13 @@ mq-mobile = "screen and (max-width: 479px)"
   display: flex;
   align-items: center;
   .search {
-    flex: 1;
     display: flex;
+    width 260px
+    max-width 100%
+    transition width 0.35s cubic-bezier(0.4,0,0.2,1)
+    &:focus-within {
+      width 460px
+    }
   }
 }
 

@@ -105,6 +105,29 @@ const contributorsPath = path.resolve(process.cwd(), 'CONTRIBUTORS.svg');
       );
     }));
 
+    // 写入自定义静态服务脚本，支持无 .html 后缀 clean URL
+    const serverScript = `#!/usr/bin/env python3
+import http.server, os, sys
+PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8899
+class Handler(http.server.SimpleHTTPRequestHandler):
+    def do_GET(self):
+        path = self.path.split('?')[0].split('#')[0]
+        _, ext = os.path.splitext(path)
+        if not ext:
+            candidate = path.rstrip('/') + '.html'
+            full = os.path.join(os.getcwd(), candidate.lstrip('/'))
+            if os.path.isfile(full):
+                self.path = candidate + ('?' + self.path.split('?')[1] if '?' in self.path else '')
+        super().do_GET()
+    def log_message(self, fmt, *args): pass
+if __name__ == '__main__':
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
+    with http.server.HTTPServer(('', PORT), Handler) as httpd:
+        print(f'Serving at http://localhost:{PORT}')
+        httpd.serve_forever()
+`;
+    await FS.outputFile(path.resolve(deployDir, 'server.py'), serverScript);
+
   } catch (err) {
     console.log(`\n ERROR :> ${err}\n`)
     if (err && err.message) {

@@ -33,7 +33,7 @@ function indexOfCatch(a) {
       this.root_path = (function () {
         let elm_path = $$('current_path');
         let url = window.location.origin + window.location.pathname;
-        return elm_path ? url.replace(/\/(c\/)?(\w|-)+\.html/, '').replace(/\/$/, '') : '';
+        return elm_path ? url.replace(/\/(c\/)?[\w-]+(\.html)?$/, '').replace(/\/$/, '') : '';
       })();
 
       this.init();
