@@ -16,30 +16,63 @@ mq-mobile = "screen and (max-width: 479px)"
   --color-hover: #f2f2f2;
 }
 
-/* 现代亮暗切换按钮 */
+/* 现代亮暗切换按钮 - 右侧贴边可折叠设计 */
 #theme-toggle
   position fixed
-  left 14px
-  top 12px
+  right 0
+  top 50%
+  transform translateY(-50%)
   z-index 999
-  width 36px
-  height 36px
-  border-radius 50%
-  border none
-  background transparent
   display flex
   align-items center
-  justify-content center
   cursor pointer
   padding 0
-  transition background 0.25s ease
-  color currentColor
+  transition all 0.3s ease
   outline none
-  &:hover
-    background rgba(128,128,128,0.18)
-  svg
-    display block
-    pointer-events none
+  /* 折叠容器 */
+  .toggle-container
+    display flex
+    align-items center
+    background var(--color-theme-bg)
+    border 1px solid var(--color-header-border)
+    border-right none
+    border-radius 20px 0 0 20px
+    box-shadow -2px 0 8px rgba(0,0,0,0.1)
+    transition all 0.3s ease
+    /* 折叠状态 - 只露出约1/5 */
+    transform translateX(calc(100% - 25px))
+    &:hover
+      transform translateX(0)
+    .toggle-btn
+      width 36px
+      height 36px
+      border none
+      background transparent
+      display flex
+      align-items center
+      justify-content center
+      cursor pointer
+      padding 0
+      color currentColor
+      svg
+        display block
+        pointer-events none
+        transition transform 0.3s ease
+      &:hover
+        svg
+          transform rotate(180deg)
+    .toggle-label
+      padding 0 12px 0 4px
+      font-size 12px
+      white-space nowrap
+      opacity 1
+      color #666
+      transition opacity 0.3s ease
+
+/* 暗色模式下 logo 图标颜色反转 */
+[data-color-mode*='dark'] .logo img,
+[data-color-mode*='dark'] .logo svg
+  filter invert(1) brightness(1.2)
 
 .warpper {
   min-height: 100vh;
@@ -79,7 +112,7 @@ mq-mobile = "screen and (max-width: 479px)"
       position absolute
       display none
       z-index 999
-      box-shadow 1px 1px 3px var(--color-theme-bg)
+      box-shadow 0 4px 12px rgba(0,0,0,0.15)
       border 1px solid var(--color-header-border)
       background var(--color-theme-bg)
       min-width 100px
@@ -217,10 +250,11 @@ mq-mobile = "screen and (max-width: 479px)"
 }
 
 .header_list
-  padding 10px 10px 10px 13px
+  padding 10px 13px 10px 10px
   border-bottom 1px solid var(--color-header-border)
   .logo
     padding-right 20px
+    padding-left 0
     flex-shrink 0
     display flex
     align-items center
@@ -324,15 +358,7 @@ mq-mobile = "screen and (max-width: 479px)"
 }
 
 @media mq-mobile {
-  /* 移动端固定暗色切换按钮位置，避免与logo重叠 */
-  #theme-toggle {
-    left 8px
-    top 8px
-    width 32px
-    height 32px
-  }
-
-  .header {
+  .header{
     width inherit
     .search .enter-input {
       button {
@@ -340,13 +366,12 @@ mq-mobile = "screen and (max-width: 479px)"
       }
     }
   }
-
   .header_list {
-    padding 10px 10px 10px 13px
+    padding 10px 13px 10px 10px
     .logo {
       float inherit
       padding-right 10px
-      padding-left 36px  /* 为暗色切换按钮留出空间 */
+      padding-left 0
       text-align center
       svg {
         width 96px

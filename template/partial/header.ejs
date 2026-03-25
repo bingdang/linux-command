@@ -23,13 +23,13 @@
       }
       function applyMode(mode) {
         document.documentElement.setAttribute('data-color-mode', mode);
-        var btn = document.getElementById('theme-toggle');
+        var btn = document.getElementById('theme-toggle-btn');
         if (btn) btn.innerHTML = mode === 'dark' ? SVG_SUN : SVG_MOON;
       }
       // 页面加载前立即设置，避免闪白
       applyMode(getMode());
       document.addEventListener('DOMContentLoaded', function(){
-        var btn = document.getElementById('theme-toggle');
+        var btn = document.getElementById('theme-toggle-btn');
         if (!btn) return;
         applyMode(getMode());
         btn.addEventListener('click', function(){
@@ -43,4 +43,9 @@
     </script>
 </head>
 <body>
-<button id="theme-toggle" aria-label="切换亮暗模式"></button>
+<div id="theme-toggle">
+  <div class="toggle-container">
+    <button id="theme-toggle-btn" class="toggle-btn" aria-label="切换亮暗模式"></button>
+    <span class="toggle-label">切换主题</span>
+  </div>
+</div>
