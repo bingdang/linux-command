@@ -386,6 +386,138 @@ https://raw.githubusercontent.com/jaywcjlove/linux-command/master/dist/data.json
 https://raw.githubusercontent.com/jaywcjlove/linux-command/master/command/<命令名称>.md 
 ```
 
+## 🤖 AI Agent API
+
+为 AI Agent 提供的 Linux 命令查询接口，支持命令列表、搜索和详情查询。
+
+### 快速启动
+
+```bash
+# 克隆项目
+git clone https://github.com/jaywcjlove/linux-command.git
+cd linux-command
+
+# 安装依赖（可选，API 服务器无需额外依赖）
+npm install
+
+# 启动 API 服务器
+npm run api
+```
+
+服务器将在 `http://localhost:3001` 启动
+
+### API 接口
+
+#### 1. 获取所有命令列表
+
+```bash
+curl http://localhost:3001/api/cmdlist
+```
+
+**响应**：
+```json
+{
+  "success": true,
+  "total": 615,
+  "data": [
+    {
+      "name": "ls",
+      "description": "显示目录内容列表",
+      "path": "/ls"
+    }
+  ]
+}
+```
+
+#### 2. 搜索命令
+
+```bash
+curl "http://localhost:3001/api/cmd/search?q=查找文件"
+```
+
+**响应**：
+```json
+{
+  "success": true,
+  "query": "查找文件",
+  "total": 15,
+  "data": [
+    {
+      "name": "find",
+      "description": "在指定目录下查找文件",
+      "path": "/find",
+      "relevance": 120
+    }
+  ]
+}
+```
+
+#### 3. 获取命令详情
+
+```bash
+curl "http://localhost:3001/api/cmd/detailed?name=ls"
+```
+
+**响应**：
+```json
+{
+  "success": true,
+  "data": {
+    "name": "ls",
+    "description": "显示目录内容列表",
+    "syntax": "ls [选项] [文件名...]",
+    "options": [...],
+    "examples": [...],
+    "notes": [...]
+  }
+}
+```
+
+### AI Agent 使用示例
+
+**Python**：
+```python
+import requests
+
+API_BASE = "http://localhost:3001"
+
+# 搜索命令
+response = requests.get(f"{API_BASE}/api/cmd/search", params={"q": "查找文件"})
+results = response.json()
+
+# 获取详情
+detail = requests.get(f"{API_BASE}/api/cmd/detailed", params={"name": "find"})
+cmd_info = detail.json()["data"]
+```
+
+**JavaScript**：
+```javascript
+const axios = require('axios');
+
+// 搜索命令
+const searchResult = await axios.get('http://localhost:3001/api/cmd/search', {
+  params: { q: '查找文件' }
+});
+
+// 获取详情
+const detail = await axios.get('http://localhost:3001/api/cmd/detailed', {
+  params: { name: 'find' }
+});
+```
+
+### 生产环境部署
+
+```bash
+# 使用 PM2（推荐）
+npm run api:prod
+
+# 或使用 Docker
+docker build -t linux-cmd-api .
+docker run -p 3001:3001 linux-cmd-api
+```
+
+详细 API 文档请查看：[API.md](./API.md)
+
 ## Linux学习资源整理
 
 
