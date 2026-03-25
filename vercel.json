@@ -1,3 +1,6 @@
 {
-  "outputDirectory": ".deploy"
+  "outputDirectory": ".deploy",
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/$1" }
+  ]
 }
