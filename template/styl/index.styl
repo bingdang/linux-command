@@ -324,7 +324,15 @@ mq-mobile = "screen and (max-width: 479px)"
 }
 
 @media mq-mobile {
-  .header{
+  /* 移动端固定暗色切换按钮位置，避免与logo重叠 */
+  #theme-toggle {
+    left 8px
+    top 8px
+    width 32px
+    height 32px
+  }
+
+  .header {
     width inherit
     .search .enter-input {
       button {
@@ -332,22 +340,30 @@ mq-mobile = "screen and (max-width: 479px)"
       }
     }
   }
+
   .header_list {
-    padding: 10px 10px 10px 13px
+    padding 10px 10px 10px 13px
     .logo {
       float inherit
       padding-right 10px
+      padding-left 36px  /* 为暗色切换按钮留出空间 */
       text-align center
-    }
-    .logo svg {
-      width 96px
+      svg {
+        width 96px
+      }
     }
     .search {
+      /* 移动端禁用搜索框伸缩效果，保持最小宽度 */
+      width 100% !important
+      &:focus-within {
+        width 100% !important
+      }
       .query {
         line-height 31px
       }
     }
   }
+
   .search_list, .hotlist {
     padding 78px 27px
   }
