@@ -7,6 +7,7 @@
   "scripts": {
     "start": "node server.js",
     "build": "node scripts/build.mjs",
+    "vercel-build": "node scripts/build.mjs",
     "dash": "npm run build && node scripts/dash.mjs",
     "dev": "nodemon server.js",
     "prod": "pm2 start server.js --name linux-command"
