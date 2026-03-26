@@ -168,6 +168,8 @@ mq-mobile = "screen and (max-width: 479px)"
   .api-docs {
     width 100%
     margin-bottom 16px
+    position relative
+    overflow hidden
     
     .api-card {
       background linear-gradient(135deg, rgba(78,110,242,0.05), rgba(139,92,246,0.03))
@@ -509,7 +511,11 @@ mq-mobile = "screen and (max-width: 479px)"
     display flex
     flex-direction column
     align-items center
+    position relative
+    overflow hidden
+    width 100%
   }
+  
   .logo {
     min-height 140px
     display flex
@@ -523,6 +529,14 @@ mq-mobile = "screen and (max-width: 479px)"
       width 420px
     }
   }
+}
+
+.mode-switcher {
+  position fixed
+  top 20px
+  right 20px
+  z-index 1000
+  margin 0
 }
 
 .header.header_list {
@@ -737,6 +751,14 @@ mq-mobile = "screen and (max-width: 479px)"
       }
     }
   }
+  
+  .mode-switcher {
+    position static !important
+    top auto !important
+    right auto !important
+    margin-bottom 16px
+  }
+  
   .header_list {
     padding 10px 13px 10px 10px
     
