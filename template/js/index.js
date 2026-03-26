@@ -215,13 +215,15 @@ function indexOfCatch(a) {
        * @param {string} [inputDisplay='none']
        */
       function setdisplay(inputDisplay) {
+        if (!self.elm_result) return;
         self.elm_result.style.display = inputDisplay || 'none'
       }
       let self = this;
       let kw = self.getQueryString('kw');
-      this.elm_query.value = kw;
+      if (this.elm_query) this.elm_query.value = kw || '';
       this.query = kw || '';
       if (this.elm_search_result) self.searchResult(true);
+      if (!this.elm_query) return;
       this.bindEvent(this.elm_query, 'input', function (e) {
         self.query = e.target.value;
         self.pushState()
