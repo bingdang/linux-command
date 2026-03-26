@@ -2,9 +2,13 @@
 <%- include('widget/search',{type: "list"}); %>
 <script type="text/javascript" src="<%=relative_path%>js/copy-to-clipboard.js"></script>
 
-<div class="markdown-body">
+<div class="markdown-body" style="position: relative;">
 <% if(md_path){ %>
 <% } %>
+
+<div style="position: absolute; top: 60px; right: 20px; color: #999; font-size: 13px; padding: 8px 12px; background: rgba(255,255,255,0.9); border-radius: 4px; z-index: 10;">
+  <span id="suanzi_container_page_pv">本文阅读量<span id="suanzi_value_page_pv"></span>次</span>
+</div>
 
 <%-mdhtml%>
 

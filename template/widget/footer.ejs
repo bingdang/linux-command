@@ -1,7 +1,7 @@
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
 <div class="footer <%if(type=='home'){%> home <%}%>">
   <div>
-    共收录 <span id="commands_info" data-target="<%=describe.command_length?describe.command_length:0%>">0</span> 个 Linux 命令
+    共收录 <span id="commands_info" data-target="<%=describe.command_length?describe.command_length:0%>">0</span> 个 Linux 命令<%if(type=='home'){%>，<span id="suanzi_container_site_pv">访问量<span id="suanzi_value_site_pv"></span>次</span><%}%>
   <script>
   (function(){
     var el = document.getElementById('commands_info');
