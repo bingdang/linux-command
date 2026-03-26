@@ -6,6 +6,15 @@
           <img src="<%=relative_path%>img/linux.svg" width="36" height="36" alt="Linux" />
         </a>
       </div>
+      <div class="search">
+          <ul class="search-list" id="result">
+          </ul>
+          <input type="text" class="query" id="query" autocomplete="off" placeholder="Linux 命令搜索"/>
+          <div class="enter-input">
+              <input type="hidden" id="current_path" value="<%=current_path%>">
+              <button id="search_btn">搜索</button>
+          </div>
+      </div>
       <%}%>
       <%if(type=='home'){%>
       <!-- AI/Human 切换按钮 -->
