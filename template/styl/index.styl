@@ -739,18 +739,37 @@ mq-mobile = "screen and (max-width: 479px)"
   }
   .header_list {
     padding 10px 13px 10px 10px
+    
+    .header_inner {
+      position static
+      flex-direction row
+      align-items center
+      gap 10px
+    }
+    
     .logo {
       float inherit
-      padding-right 10px
+      padding-right 0
       padding-left 0
       text-align center
+      margin-left 0 !important
+      flex-shrink 0
+      
       svg {
-        width 96px
+        width 32px
+        height 32px
       }
     }
+    
     .search {
       /* 移动端保持最短状态，不伸缩 */
-      width 100% !important
+      flex 1
+      min-width 0
+      position static !important
+      left auto !important
+      transform none !important
+      width auto !important
+      
       .query {
         line-height 31px
       }
