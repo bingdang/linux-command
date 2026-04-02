@@ -531,12 +531,27 @@ mq-mobile = "screen and (max-width: 479px)"
   }
 }
 
-.mode-switcher {
+.header_list ~ .mode-switcher,
+.header.header_list .mode-switcher {
   position fixed
   top 20px
   right 20px
   z-index 1000
   margin 0
+}
+
+.header.home .mode-switcher {
+  position fixed
+  top 20px
+  right 20px
+  z-index 1000
+  margin 0
+  flex-direction row
+  gap 8px
+}
+
+.header.home .header_inner {
+  padding-top 100px
 }
 
 .header.header_list {
