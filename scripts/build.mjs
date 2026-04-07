@@ -50,7 +50,8 @@ const contributorsPath = path.resolve(process.cwd(), 'CONTRIBUTORS.svg');
         p: '/index.html',
         n: 'Linux命令搜索引擎',
         d: '最专业的Linux命令大全，内容包含Linux命令手册、详解、学习，值得收藏的Linux命令速查手册。',
-        command_length: jsonData.data.length
+        command_length: jsonData.data.length,
+        home_path: '/'
       }
     );
 
@@ -61,7 +62,8 @@ const contributorsPath = path.resolve(process.cwd(), 'CONTRIBUTORS.svg');
         p: '/list.html',
         n: '搜索',
         d: '最专业的Linux命令大全，命令搜索引擎，内容包含Linux命令手册、详解、学习，值得收藏的Linux命令速查手册。',
-        command_length: jsonData.data.length
+        command_length: jsonData.data.length,
+        home_path: '/'
       }
     );
 
@@ -73,7 +75,8 @@ const contributorsPath = path.resolve(process.cwd(), 'CONTRIBUTORS.svg');
         n: '搜索',
         d: '最专业的Linux命令大全，命令搜索引擎，内容包含Linux命令手册、详解、学习，值得收藏的Linux命令速查手册。',
         arr: jsonData.data,
-        command_length: jsonData.data.length
+        command_length: jsonData.data.length,
+        home_path: '/'
       }
     );
 
@@ -92,11 +95,13 @@ const contributorsPath = path.resolve(process.cwd(), 'CONTRIBUTORS.svg');
         arr: jsonData.data,
         command_length: jsonData.data.length,
         contributors: svgStr,
+        home_path: '/'
       }
     );
     
     await Promise.all(jsonData.data.map(async (item, idx) => {
       item.command_length = jsonData.data.length;
+      item.home_path = '../';
       await createTmpToHTML(
         path.resolve(process.cwd(), 'template', 'details.ejs'),
         path.resolve(deployDir, 'c', `${item.n}.html`),
@@ -212,7 +217,7 @@ if __name__ == '__main__':
       let mdhtml = '';
       let relative_path = '';
       if (mdPath) {
-        // CSS/JS 引用相对地址
+        // CSS/JS 引用相对地址（命令详细页）
         relative_path = '../';
         mdPathName = `/command/${desJson.n}.md`;
         const READMESTR = await FS.readFile(path.resolve(mdPath, `${desJson.n}.md`));
@@ -222,6 +227,7 @@ if __name__ == '__main__':
       let html = ejs.render(tmpStr.toString(), {
         filename: fromPath,
         relative_path, // 当前文件相对于根目录的相对路径
+        home_path: desJson.home_path || '/',  // 返回首页的路径
         md_path: mdPathName || '',  // markdown 路径
         mdhtml: mdhtml || '',
         current_path,   // 当前 html 路径
